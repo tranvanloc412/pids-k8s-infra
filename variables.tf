@@ -14,22 +14,21 @@ variable "region" {
   default     = "ap-southeast-1"
 }
 
-variable "vpc_cidr" {
-  description = "VPC CIDR"
-  default     = "10.0.0.0/16"
+variable "myip" {
+  default     = ["27.78.39.216/32"]
 }
 
-variable "azs" {
-  description = "Available zones"
-  default     = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+variable "kms_key_id" {
+  default = null
 }
 
-variable "private_subnets" {
-  description = "Private Subnets CIDR"
-  default     = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
+variable "vpc_id" {
+  default = null
 }
-
 variable "public_subnets" {
-  description = "Public Subnets CIDR"
-  default     = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
+  default = null
+}
+
+variable "node_instance_types" {
+  default = ["t3.large", "t3.medium", "m6i.large", "m5.large", "m5n.large", "m5zn.large"]
 }

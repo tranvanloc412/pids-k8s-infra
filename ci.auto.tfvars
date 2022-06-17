@@ -1,15 +1,11 @@
 ########################################
 # Environment setting
 ########################################
-env                     = "prod"
-project                 = "pids"
-region                  = "ap-southeast-1"
+env     = "prod"
+project = "pids"
+region  = "ap-southeast-1"
+myip    = ["27.78.39.216/32"]
 
-
-########################################
-# VPC
-########################################
-vpc_cidr        = "10.1.0.0/16"
-azs             = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
-private_subnets = ["10.1.0.0/24", "10.1.1.0/24", "10.1.2.0/24"]
-public_subnets  = ["10.1.10.0/24", "10.1.11.0/24", "10.1.12.0/24"]
+kms_key_id      = "arn:aws:kms:ap-southeast-1:808059214513:key/420d784b-fa72-4914-ab28-0fad425a2ca7"
+vpc_id          = "vpc-06274652da8c8f5d5"
+public_subnets = ["subnet-0c401849717391329","subnet-077f6316e0f85258d","subnet-02a6b44cafb4cbead"]
