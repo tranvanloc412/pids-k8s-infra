@@ -15,7 +15,7 @@ variable "region" {
 }
 
 variable "myip" {
-  default     = ["27.78.39.216/32"]
+  default     = ["115.74.21.240/32"]
 }
 
 variable "kms_key_id" {
@@ -30,5 +30,5 @@ variable "public_subnets" {
 }
 
 variable "node_instance_types" {
-  default = ["t3.large", "t3.medium", "m6i.large", "m5.large", "m5n.large", "m5zn.large"]
+  default = ["t3.large", "t3.medium"]
 }
