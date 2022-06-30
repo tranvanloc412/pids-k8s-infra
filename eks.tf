@@ -5,6 +5,7 @@ module "eks" {
   cluster_name                    = join("-", [local.prefix, "eks"])
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
+  enable_irsa                     = true
 
   cluster_addons = {
     coredns = {
