@@ -26,16 +26,16 @@ module "eks" {
   subnet_ids = var.public_subnets
 
   # Extend cluster security group rules
-  cluster_security_group_additional_rules = {
-    egress_nodes_ephemeral_ports_tcp = {
-      description                = "To node 1025-65535"
-      protocol                   = "tcp"
-      from_port                  = 1025
-      to_port                    = 65535
-      type                       = "egress"
-      source_node_security_group = true
-    }
-  }
+  # cluster_security_group_additional_rules = {
+  #   egress_nodes_ephemeral_ports_tcp = {
+  #     description                = "To node 1025-65535"
+  #     protocol                   = "tcp"
+  #     from_port                  = 1025
+  #     to_port                    = 65535
+  #     type                       = "egress"
+  #     source_node_security_group = true
+  #   }
+  # }
 
   # Extend node-to-node security group rules
   # node_security_group_additional_rules = {
@@ -204,6 +204,13 @@ resource "aws_security_group" "additional" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = var.myip
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = local.tags
