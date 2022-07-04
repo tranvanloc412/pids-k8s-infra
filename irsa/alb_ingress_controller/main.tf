@@ -39,6 +39,7 @@ data "aws_iam_policy_document" "this" {
 
   statement {
     actions = [
+      "ec2:DescribeAvailabilityZones",
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:CreateSecurityGroup",
       "ec2:CreateTags",
@@ -186,22 +187,22 @@ resource "aws_iam_role_policy_attachment" "this" {
 #   }
 # }
 
-resource "kubernetes_service_account" "this" {
-  automount_service_account_token = true
-  metadata {
-    name      = var.service_account
-    namespace = var.k8s_namespace
-    annotations = {
-      # This annotation is only used when running on EKS which can
-      # use IAM roles for service accounts.
-      "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
-    }
-    labels = {
-      "app.kubernetes.io/name"       = var.service_account
-      "app.kubernetes.io/managed-by" = "terraform"
-    }
-  }
-}
+# resource "kubernetes_service_account" "this" {
+#   automount_service_account_token = true
+#   metadata {
+#     name      = var.service_account
+#     namespace = var.k8s_namespace
+#     annotations = {
+#       # This annotation is only used when running on EKS which can
+#       # use IAM roles for service accounts.
+#       "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
+#     }
+#     labels = {
+#       "app.kubernetes.io/name"       = var.service_account
+#       "app.kubernetes.io/managed-by" = "terraform"
+#     }
+#   }
+# }
 
 # resource "kubernetes_cluster_role" "this" {
 #   metadata {
