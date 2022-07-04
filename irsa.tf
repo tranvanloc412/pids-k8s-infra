@@ -7,3 +7,13 @@ module "irsa_process_service" {
 
   depends_on = [module.eks]
 }
+
+module "irsa_alb_ingress_controller" {
+  source = "./irsa/alb_ingress_controller"
+
+  account_id = local.account_id
+  issuer_url = data.aws_eks_cluster.target.identity[0].oidc[0].issuer
+  tags       = local.tags
+
+  depends_on = [module.eks]
+}
