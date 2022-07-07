@@ -17,3 +17,13 @@ module "irsa_alb_ingress_controller" {
 
   depends_on = [module.eks]
 }
+
+module "irsa_external_dns" {
+  source = "./irsa/external_dns"
+
+  account_id = local.account_id
+  issuer_url = data.aws_eks_cluster.target.identity[0].oidc[0].issuer
+  tags       = local.tags
+
+  depends_on = [module.eks]
+}
