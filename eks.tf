@@ -26,16 +26,16 @@ module "eks" {
   subnet_ids = var.public_subnets
 
   # Extend cluster security group rules
-  cluster_security_group_additional_rules = {
-    egress_nodes_ephemeral_ports_tcp = {
-      description                = "To node 1025-65535"
-      protocol                   = "tcp"
-      from_port                  = 1025
-      to_port                    = 65535
-      type                       = "egress"
-      source_node_security_group = true
-    }
-  }
+  # cluster_security_group_additional_rules = {
+  #   egress_nodes_ephemeral_ports_tcp = {
+  #     description                = "To node 1025-65535"
+  #     protocol                   = "tcp"
+  #     from_port                  = 1025
+  #     to_port                    = 65535
+  #     type                       = "egress"
+  #     source_node_security_group = true
+  #   }
+  # }
 
   #Extend node-to-node security group rules
   node_security_group_additional_rules = {
@@ -55,6 +55,14 @@ module "eks" {
       type             = "egress"
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress_all = {
+      description = "Cluster to node all ports/protocols"
+      protocol    = "-1"
+      from_port   = 0
+      to_port     = 0
+      type        = "ingress"
+      source_cluster_security_group = true
     }
   }
 
@@ -144,20 +152,12 @@ module "eks" {
       # security_group_use_name_prefix = false
       # security_group_description     = "EKS managed node group complete example security group"
       # security_group_rules = {
-      #   phoneOut = {
-      #     description = "Hello CloudFlare"
-      #     protocol    = "udp"
-      #     from_port   = 53
-      #     to_port     = 53
-      #     type        = "egress"
-      #     cidr_blocks = ["1.1.1.1/32"]
-      #   }
       #   phoneHome = {
       #     description                   = "Hello cluster"
       #     protocol                      = "udp"
-      #     from_port                     = 53
+      #     from_port                     = 1025
       #     to_port                       = 53
-      #     type                          = "egress"
+      #     type                          = "ingress"
       #     source_cluster_security_group = true # bit of reflection lookup
       #   }
       # }
