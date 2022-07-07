@@ -72,7 +72,7 @@ module "eks" {
     disk_size      = 50
     instance_types = ["t3.medium"]
 
-    attach_cluster_primary_security_group = true
+    attach_cluster_primary_security_group = false
     vpc_security_group_ids                = [aws_security_group.additional.id]
   }
 
