@@ -200,9 +200,10 @@ resource "aws_security_group" "additional" {
   vpc_id      = var.vpc_id
 
   ingress {
+    description = "Cluster to node all ports/protocols"
+    protocol    = "-1"
     from_port   = 0
     to_port     = 0
-    protocol    = "tcp"
     cidr_blocks = var.myip
   }
 
