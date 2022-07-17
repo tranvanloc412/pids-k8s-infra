@@ -16,7 +16,7 @@ variable "service_account" {
 variable "k8s_namespace" {
   description = "Kubernetes namespace to deploy the AWS ALB Ingress Controller into."
   type        = string
-  default     = "alb-ingress-controller"
+  default     = "shared-services"
 }
 
 variable "aws_iam_path_prefix" {
