@@ -10,7 +10,7 @@ variable "sqs_service_account" {
 
 variable "k8s_namespace" {
   type    = string
-  default = "default"
+  default = "process-service"
 }
 
 variable "aws_iam_path_prefix" {
