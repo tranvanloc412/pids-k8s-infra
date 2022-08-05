@@ -27,3 +27,13 @@ module "irsa_external_dns" {
 
   depends_on = [module.eks]
 }
+
+module "irsa_vault" {
+  source = "./irsa/vault"
+
+  account_id = local.account_id
+  issuer_url = data.aws_eks_cluster.target.identity[0].oidc[0].issuer
+  tags       = local.tags
+
+  depends_on = [module.eks]
+}
