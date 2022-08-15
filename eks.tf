@@ -87,10 +87,10 @@ module "eks" {
       instance_types = var.node_instance_types
       capacity_type  = "SPOT"
 
-      labels = {
-        k8s.io/cluster-autoscaler/pids-prod-eks = "owned"
-        k8s.io/cluster-autoscaler/enabled       = "true"
-      }
+      # labels = {
+      #   k8s.io/cluster-autoscaler/pids-prod-eks = "owned"
+      #   k8s.io/cluster-autoscaler/enabled       = "true"
+      # }
 
       # taints = {
       #   dedicated = {
