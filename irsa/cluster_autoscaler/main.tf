@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "this" {
     condition {
       test     = "StringEquals"
       variable = "aws:ResourceTag/k8s.io/cluster-autoscaler/pids-prod-eks"
-      values   = "owned"
+      values   = ["owned"]
     }
   }
 }
