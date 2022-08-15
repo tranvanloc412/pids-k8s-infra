@@ -57,11 +57,11 @@ module "eks" {
       ipv6_cidr_blocks = ["::/0"]
     }
     ingress_all = {
-      description = "Cluster to node all ports/protocols"
-      protocol    = "-1"
-      from_port   = 0
-      to_port     = 0
-      type        = "ingress"
+      description                   = "Cluster to node all ports/protocols"
+      protocol                      = "-1"
+      from_port                     = 0
+      to_port                       = 0
+      type                          = "ingress"
       source_cluster_security_group = true
     }
   }
@@ -81,17 +81,16 @@ module "eks" {
     # }
     green = {
       min_size     = 0
-      max_size     = 2
-      desired_size = 1
+      max_size     = 4
+      desired_size = 2
 
       instance_types = var.node_instance_types
       capacity_type  = "SPOT"
 
-      # labels = {
-      #   Environment = "test"
-      #   GithubRepo  = "terraform-aws-eks"
-      #   GithubOrg   = "terraform-aws-modules"
-      # }
+      labels = {
+        k8s.io/cluster-autoscaler/pids-prod-eks = "owned"
+        k8s.io/cluster-autoscaler/enabled       = "true"
+      }
 
       # taints = {
       #   dedicated = {
