@@ -37,3 +37,13 @@ module "irsa_vault" {
 
   depends_on = [module.eks]
 }
+
+module "irsa_cluster_autoscaler" {
+  source = "./irsa/cluster_autoscaler"
+
+  account_id = local.account_id
+  issuer_url = data.aws_eks_cluster.target.identity[0].oidc[0].issuer
+  tags       = local.tags
+
+  depends_on = [module.eks]
+}
